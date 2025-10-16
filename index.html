@@ -1,41 +1,285 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Welcome</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* Background & Body */
+    body {
+      margin: auto;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow: auto;
+      background: linear-gradient(
+        315deg,
+        rgba(101, 0, 94, 1) 3%,
+        rgba(60, 132, 206, 1) 38%,
+        rgba(48, 238, 226, 1) 68%,
+        rgba(255, 25, 25, 1) 98%
+      );
+      animation: gradient 15s ease infinite;
+      background-size: 400% 400%;
+      background-attachment: fixed;
+    }
 
-  <head>
-    <meta charset="UTF-8">
-    <title>Welcome</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="./style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    @keyframes gradient {
+      0% {
+        background-position: 0% 0%;
+      }
+      50% {
+        background-position: 100% 100%;
+      }
+      100% {
+        background-position: 0% 0%;
+      }
+    }
 
+    /* Waves */
+    .wave {
+      background: rgb(255 255 255 / 25%);
+      border-radius: 1000% 1000% 0 0;
+      position: fixed;
+      width: 200%;
+      height: 12em;
+      animation: wave 10s -3s linear infinite;
+      transform: translate3d(0, 0, 0);
+      opacity: 0.8;
+      bottom: 0;
+      left: 0;
+      z-index: -1;
+    }
 
-  </head>
-    
-  <body>
- <div class="wave"></div>
-     <div class="wave"></div>
-     <div class="wave"></div>
-  <div class="pendulum">
-  <div class="pendulum_box">
-    <div class="ball first">W</div>
-      <div class="ball">E</div>
-      <div class="ball">L</div>
-      <div class="ball">C</div>
-      <div class="ball">O</div>
-      <div class="ball">M</div>
-      <div class="ball last">E</div>
+    .wave:nth-of-type(2) {
+      bottom: -1.25em;
+      animation: wave 18s linear reverse infinite;
+    }
+
+    .wave:nth-of-type(3) {
+      bottom: -2.5em;
+      animation: wave 20s -1s reverse infinite;
+      opacity: 0.9;
+    }
+
+    @keyframes wave {
+      2% {
+        transform: translateX(1);
+      }
+      25% {
+        transform: translateX(-25%);
+      }
+      50% {
+        transform: translateX(-50%);
+      }
+      75% {
+        transform: translateX(-25%);
+      }
+      100% {
+        transform: translateX(1);
+      }
+    }
+
+    /* Main Centered Layout */
+    .main-center-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      z-index: 2;
+    }
+
+    /* Salutation Text */
+    .salutation-text {
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      border-radius: 20px;
+      color: #ffffff;
+      font-size: 40px;
+      font-weight: bold;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      opacity: 0;
+      animation: slideUpIcon 0.8s ease-out forwards;
+      animation-delay: 2s;
+      animation-fill-mode: forwards;
+      text-align: center;
+    }
+
+    /* Pendulum Container */
+    .pendulum {
+      width: 320px;
+      height: 180px;
+      padding-top: 15px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 15px solid rgba(25, 25, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .pendulum_box {
+      display: flex;
+      padding: 120px 0 0 5px;
+      position: absolute;
+    }
+
+    .ball {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      background-color: white;
+      position: relative;
+      transform-origin: 50% -300%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: black;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      font-size: 18px;
+    }
+
+    .ball::before {
+      content: '';
+      width: 2px;
+      height: 120px;
+      background-color: #fffeff;
+      left: 18px;
+      top: -120px;
+      position: absolute;
+    }
+
+    .ball.first {
+      animation: firstball 0.9s alternate ease-in infinite;
+    }
+
+    .ball.last {
+      animation: lastball 0.9s alternate ease-out infinite;
+    }
+
+    @keyframes firstball {
+      0% {
+        transform: rotate(35deg);
+      }
+      50% {
+        transform: rotate(0deg);
+      }
+    }
+
+    @keyframes lastball {
+      50% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(-35deg);
+      }
+    }
+
+    /* LinkedIn + Email Icons */
+    .linkedin-below {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 590px;
+      animation: slideUpIcon 0.8s ease-out forwards;
+      animation-delay: 2s;
+      opacity: 0;
+      animation-fill-mode: forwards;
+    }
+
+    .linkedin-below a {
+      width: 45px;
+      height: 45px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 10px solid rgba(255, 255, 255, 0.3);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0a66c2;
+      text-decoration: none;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      font-size: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .linkedin-below a.email-icon {
+      color: #d44638;
+    }
+
+    .linkedin-below a:hover {
+      transform: scale(1.1);
+    }
+
+    @keyframes slideUpIcon {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Responsive Fixes */
+    @media (max-width: 600px) {
+      .salutation-text {
+        font-size: 28px;
+        padding: 8px 16px;
+      }
+
+      .pendulum {
+        width: 280px;
+        height: 160px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Background Waves -->
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+
+  <!-- Centered Main Content -->
+  <div class="main-center-wrapper">
+    <div class="salutation-text">Salutations!!</div>
+    <div class="pendulum">
+      <div class="pendulum_box">
+        <div class="ball first">W</div>
+        <div class="ball">E</div>
+        <div class="ball">L</div>
+        <div class="ball">C</div>
+        <div class="ball">O</div>
+        <div class="ball">M</div>
+        <div class="ball last">E</div>
+      </div>
+    </div>
   </div>
-</div>
-   <div class="linkedin-below">
+<br/><br/><br/>
+  <!-- Social Icons -->
+  <div class="linkedin-below">
     <a href="https://au.linkedin.com/in/utsav-luitel01" target="_blank" aria-label="LinkedIn">
       <i class="fab fa-linkedin-in"></i>
     </a>
-<a href="mailto:meroid13@gmail.com" target="_blank" aria-label="Email" class="email-icon">
-    <i class="fas fa-envelope"></i>
-  </a>
+    <a href="mailto:meroid13@gmail.com" target="_blank" aria-label="Email" class="email-icon">
+      <i class="fas fa-envelope"></i>
+    </a>
   </div>
-</div>
-
-<div class="salutation-text">Salutations!!</div>
-  </body>
-  
+</body>
 </html>
